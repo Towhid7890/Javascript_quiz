@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="first-page" class="quizbox">
+        <div class="img">
+            <img src="./img/undraw_questions_re_1fy7.svg" alt="">
+        </div>
+        <div class="text1">
+            <h3>Quiz app with fixed time</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam cumque ea blanditiis eveniet nobis aut id magnam recusandae, facere ab.</p>
+            <h3>Quiz app with fixed time</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, architecto.</p>
+        </div>
+        <div class="myBtn">
+            <button id="startBtn">Start Quiz</button>
+        </div>
+
+    </div>
+
+
+ <div id="second-page" class="quizbox1">
+        <div class="heading">
+            <h3>You Have to maintain this criteria</h3>
+            <hr>
+        </div>
+        <div class="text1">
+            <ul>
+                <li>Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</li>
+                <li>Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</li>
+            </ul>
+            
+        </div>
+        <div class="second-btn">
+            <button id="exitBtn" class="exit-btn">Exit Quiz</button>
+            <button id="continueBtn" class="continue-btn">Continue</button>
+        </div>
+
+    </div>
+
+
+
+    <div id="third-page" class="third-page">
+        <div>
+            <div class="thirdHeader">
+                <div class="title">
+                    Start Exam
+                </div>
+                <div class="time-count">
+                    <div class="timeleft">Time Left</div>
+                    <div class="seconds">
+                        15
+                    </div>
+                </div>
+                <div class="time-lines"></div>
+               
+            </div>
+        </div>
+        <div class="question-body">
+            <div class="text">
+                <!-- 1. What Does HTML stand for? -->
+            </div>
+            <div class="myoption">
+               
+            
+            </div>
+        </div>
+
+        <footer>
+            <div class="total-que">
+                <!-- <p>1 of 5 question</p> -->
+            </div>
+            <button id="nextBtn" class="nextbtn">Next Quiz</button>
+        </footer>
+    </div>
+
+
+
+
+
+
+    <script src="./question.js"></script>
+    <script>
+        document.getElementById('startBtn').addEventListener('click',function(){
+            document.getElementById('first-page').style.display ='none';
+            document.getElementById('second-page').style.display = 'inline';
+        });
+      
+        document.getElementById('exitBtn').addEventListener('click',function(){
+            document.getElementById('second-page').style.display = 'none';
+            document.getElementById('first-page').style.display = 'inline';
+            
+        });
+        document.getElementById('continueBtn').addEventListener('click',function(){
+            document.getElementById('second-page').style.display = 'none';
+            document.getElementById('third-page').style.display = 'inline';
+            showQuestion(0);
+        });
+
+         let que_count = 0;
+        document.getElementById('nextBtn').addEventListener('click',function(){
+            if(que_count < questions.length - 1){
+                que_count++
+                showQuestion(que_count)
+            }
+            else{
+                console.log('You Have Completed Your task')
+            }
+        })
+
+        function showQuestion(index){
+            const que_text = document.querySelector('.text');
+            const option_list = document.querySelector('.myoption');
+            let option_tag = '<div class="option"><span>' + questions[index].option[0] +'</span></div>'
+            + '<div class="option"><span>' + questions[index].option[1] +'</span></div>'+
+            '<div class="option"><span>' + questions[index].option[2] +'</span></div>'+
+            '<div class="option"><span>' + questions[index].option[3] +'</span></div>'
+            let que_tag = "<span>" + questions[index].numb + "." + questions[index].question + "</span>";
+            que_text.innerHTML = que_tag;
+            option_list.innerHTML = option_tag;
+            const totalQue = document.querySelector('.total-que');
+            let count_que = '<p>'+ questions[index].numb + " of 5 Question" + '</P>';
+               totalQue.innerHTML = count_que; 
+        }
+    </script>
+   
+</body>
+</html>
